@@ -61,7 +61,13 @@ def get_weather(province, city):
     temp = weatherinfo["temp"]
     # 最低气温
     tempn = weatherinfo["tempn"]
-    return weather, temp, tempn
+    
+    #湿度
+    humidity = weatherinfo["humidity"]
+    #穿衣指数
+    indices = weatherinfo["indices"]
+    
+    return weather, temp, tempn, humidity, indices
 
 
 def get_birthday(birthday, year, today):
@@ -111,7 +117,7 @@ def get_ciba():
     return note_ch, note_en
 
 
-def send_message(to_user, access_token, city_name, weather, max_temperature, min_temperature, cs_name, tq, gw, dw,
+def send_message(to_user, access_token, city_name, weather, max_temperature, min_temperature,humidity1, indices1, cs_name, tq, gw, dw,humidity2, indices2,
                  note_ch, note_en):
     url = "https://api.weixin.qq.com/cgi-bin/message/template/send?access_token={}".format(access_token)
     week_list = ["星期日", "星期一", "星期二", "星期三", "星期四", "星期五", "星期六"]
@@ -158,6 +164,14 @@ def send_message(to_user, access_token, city_name, weather, max_temperature, min
                 "value": max_temperature,
                 "color": get_color()
             },
+            "humidity1": {
+                "value": humidity1,
+                "color": get_color()
+            },
+            "indices1": {
+                "value": indices1,
+                "color": get_color()
+            },
             "cs": {
                 "value": cs_name,
                 "color": get_color()
@@ -172,6 +186,14 @@ def send_message(to_user, access_token, city_name, weather, max_temperature, min
             },
             "dw": {
                 "value": gw,
+                "color": get_color()
+            },
+            "humidity2": {
+                "value": humidity2,
+                "color": get_color()
+            },
+            "indices2": {
+                "value": indices2,
                 "color": get_color()
             },
             "love_day": {
@@ -234,14 +256,14 @@ if __name__ == "__main__":
     users = config["user"]
     # 传入省份和市获取天气信息
     province, city = config["province"], config["city"]
-    weather, max_temperature, min_temperature = get_weather(province, city)
+    weather, max_temperature, min_temperature, humidity1, indices1 = get_weather(province, city)
     sf, cs = config["sf"], config["cs"]
-    tq, gw, dw = get_weather(sf, cs)
+    tq, gw, dw, humidity2, indices2= get_weather(sf, cs)
 
     # 获取词霸每日金句
     note_ch, note_en = get_ciba()
     # 公众号推送消息
     for user in users:
-        send_message(user, accessToken, city, weather, max_temperature, min_temperature, cs, tq, gw, dw, note_ch,
+        send_message(user, accessToken, city, weather, max_temperature, min_temperature,humidity1, indices1, cs, tq, gw, dw,humidity2, indices2, note_ch,
                      note_en)
     os.system("pause")

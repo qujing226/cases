@@ -1,1 +1,5 @@
-package Cases
+package main
+
+func main() {
+
+}

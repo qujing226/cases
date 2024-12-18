@@ -1,4 +1,4 @@
-package main
+package syncMap
 
 import "sync"
 
@@ -28,3 +28,5 @@ func (m *Map[k, v]) Store(key k, val v) {
 	defer m.mu.Unlock()
 	m.m[key] = val
 }
+
+// 加入 布隆过滤器

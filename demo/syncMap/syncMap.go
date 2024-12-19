@@ -2,8 +2,8 @@ package syncMap
 
 import (
 	"fmt"
+	"peninsula12/Cases/demo/bloomFilter"
 	"sync"
-	"websocket/demo/bloomFilter"
 )
 
 // 1. 使用 读写锁 实现

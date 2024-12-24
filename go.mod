@@ -1,3 +1,3 @@
-module peninsula12/Cases
+module peninsula12/cases
 
 go 1.23.1

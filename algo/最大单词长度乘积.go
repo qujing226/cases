@@ -1,4 +1,4 @@
-package algo
+package main
 
 /*
 给定一个字符串数组 words，每个字符串 words[i] 代表一个单词

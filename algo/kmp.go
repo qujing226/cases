@@ -1,4 +1,4 @@
-package algo
+package main
 
 func KMP(text, patten string) bool {
 	next := next(patten)

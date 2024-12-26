@@ -46,3 +46,36 @@ func replaceNumberMain() {
 
 	fmt.Println(newString)
 }
+
+func replace() {
+	var s []byte
+	_, err := fmt.Scanln(&s)
+	if err != nil {
+		panic(err)
+	}
+	num, l := 0, len(s)-1
+	for _, v := range s {
+		if v >= '0' && v <= '9' {
+			num++
+		}
+	}
+	for i := 0; i < num; i++ {
+		s = append(s, "     "...)
+	}
+	tem := []byte("number")
+	tl := 5
+	left, right := l, len(s)-1
+	for left >= 0 {
+		if s[left] < '0' || s[left] > '9' {
+			s[right] = s[left]
+		} else {
+			for i, val := range tem {
+				s[right-tl+i] = val
+			}
+			right -= tl
+		}
+		left--
+		right--
+	}
+	fmt.Println(string(s))
+}

@@ -1,0 +1,9 @@
+version: '3'
+services:
+  eve-ng:
+    image: bacnt/eve-ng
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./eve-ng-data:/eve-ng/data

@@ -103,13 +103,13 @@ func printProgress(i int, res result, fp *files.FileProcessor, wg *sync.WaitGrou
 	if res.IsValid {
 		printMu.Lock()
 		valid++
-		printMu.Unlock()
 		fp.WriteRow(records[res.Seq], true)
+		printMu.Unlock()
 	} else {
 		printMu.Lock()
 		invalid++
-		printMu.Unlock()
 		fp.WriteRow(records[res.Seq], false)
+		printMu.Unlock()
 	}
 	// 每 10 次以进度条的形式打印一下输出,打印时清除上次的信息
 	if i%10 == 0 {

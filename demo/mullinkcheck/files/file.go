@@ -72,7 +72,7 @@ func (f *FileProcessor) createBadFile() (err error) {
 	if err != nil {
 		return
 	}
-	bufWriter := bufio.NewWriterSize(f.badFile, 1024*1024)
+	bufWriter := bufio.NewWriterSize(f.badFile, 4096)
 	f.BadWriter = csv.NewWriter(bufWriter)
 	return
 }

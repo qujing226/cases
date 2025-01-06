@@ -1,4 +1,4 @@
-module main
+module github.com/qujing226/cases/gotoolbox
 
 go 1.23.1
 

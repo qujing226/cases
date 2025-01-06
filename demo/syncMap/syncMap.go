@@ -2,7 +2,7 @@ package syncMap
 
 import (
 	"fmt"
-	"peninsula12/cases/demo/bloomFilter"
+	"github.com/qujing226/cases/demo/bloomFilter"
 	"sync"
 )
 

@@ -48,6 +48,7 @@ func (f *FileProcessor) FlushClose() {
 }
 func (f *FileProcessor) openData() (err error) {
 	f.file, err = os.OpenFile("./demo/mullinkcheck/files/data.csv", os.O_RDONLY, 0666)
+	//f.file, err = os.OpenFile("./data.csv", os.O_RDONLY, 0666)
 	if err != nil {
 		return
 	}
@@ -57,6 +58,7 @@ func (f *FileProcessor) openData() (err error) {
 }
 func (f *FileProcessor) createGoodFile() (err error) {
 	f.goodFile, err = os.OpenFile("./demo/mullinkcheck/files/good.csv", os.O_CREATE|os.O_RDWR|os.O_TRUNC, 0666)
+	//f.goodFile, err = os.OpenFile("./good.csv", os.O_CREATE|os.O_RDWR|os.O_TRUNC, 0666)
 	if err != nil {
 		return
 	}
@@ -66,6 +68,7 @@ func (f *FileProcessor) createGoodFile() (err error) {
 }
 func (f *FileProcessor) createBadFile() (err error) {
 	f.badFile, err = os.OpenFile("./demo/mullinkcheck/files/bad.csv", os.O_CREATE|os.O_RDWR|os.O_TRUNC, 0666)
+	//f.badFile, err = os.OpenFile("./bad.csv", os.O_CREATE|os.O_RDWR|os.O_TRUNC, 0666)
 	if err != nil {
 		return
 	}

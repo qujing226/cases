@@ -16,14 +16,11 @@ type FileProcessor struct {
 	GoodWriter *csv.Writer
 	BadWriter  *csv.Writer
 	sync.Once
-	maxFileSize int64 // 文件大小
 }
 
 // NewFileProcessor 初始化文件处理器
 func NewFileProcessor(maxFileSize int64) (*FileProcessor, error) {
-	fp := &FileProcessor{
-		maxFileSize: maxFileSize,
-	}
+	fp := &FileProcessor{}
 	if err := fp.openData(); err != nil {
 		return nil, err
 	}

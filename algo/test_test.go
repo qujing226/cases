@@ -1,7 +1,10 @@
 package main
 
 import (
+	"bufio"
+	"fmt"
 	"reflect"
+	"strings"
 	"testing"
 )
 
@@ -29,4 +32,41 @@ func TestAddRange(t *testing.T) {
 			t.Errorf("AddRange(%d, %d) = %v, want %v", test.start, test.end, test.rm.intervals, test.expected)
 		}
 	}
+}
+
+func Test(t *testing.T) {
+	input := "a1b2c3"
+	reader := bufio.NewReader(strings.NewReader(input))
+	var s string
+	_, err := fmt.Fscanln(reader, &s)
+	if err != nil {
+		return
+	}
+	var target []byte = []byte("number")
+	s = strings.TrimSpace(s)
+	sb := []byte(s)
+	num := 0
+	length := len(sb)
+	for _, val := range sb {
+		if val > '0' && val < '9' {
+			num++
+		}
+	}
+	for i := 0; i < num; i++ {
+		sb = append(sb, "     "...)
+	}
+	left, right := length-1, len(sb)-1
+	for left != right {
+		if sb[left] < '0' || sb[left] > '9' {
+			sb[right] = sb[left]
+		} else {
+			for i, val := range target {
+				sb[right-5+i] = val
+			}
+			right -= 5
+		}
+		left--
+		right--
+	}
+	fmt.Println(string(sb))
 }

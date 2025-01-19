@@ -70,3 +70,9 @@ func Test(t *testing.T) {
 	}
 	fmt.Println(string(sb))
 }
+
+// 逆波兰函数
+func Test_evalRPN(t *testing.T) {
+	num := evalRPN([]string{"10", "6", "9", "3", "+", "-11", "*", "/", "*", "17", "+", "5", "+"})
+	t.Log(num)
+}

@@ -76,3 +76,9 @@ func Test_evalRPN(t *testing.T) {
 	num := evalRPN([]string{"10", "6", "9", "3", "+", "-11", "*", "/", "*", "17", "+", "5", "+"})
 	t.Log(num)
 }
+
+func Test_kmp(t *testing.T) {
+	str := "mississippi"
+	pat := "issip"
+	t.Log(KMP(str, pat))
+}

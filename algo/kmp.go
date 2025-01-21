@@ -1,6 +1,6 @@
 package main
 
-func KMP(text, patten string) bool {
+func KMP(text, patten string) (bool, int) {
 	next := next(patten)
 	i, j := 0, 0
 	for i < len(text) && j < len(patten) {
@@ -13,7 +13,7 @@ func KMP(text, patten string) bool {
 			i++
 		}
 	}
-	return j == len(patten)
+	return j == len(patten), i - j
 }
 
 func next(s string) []int {

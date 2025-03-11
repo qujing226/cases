@@ -58,6 +58,7 @@ func preOrderTraversal(root *TreeNode) (res []int) {
 
 	for len(stack) != 0 {
 		temp := stack[len(stack)-1]
+		stack = stack[:len(stack)-1]
 		res = append(res, temp.Val)
 		if temp.Right != nil {
 			stack = append(stack, temp.Right)
@@ -76,6 +77,7 @@ func postOrderTraversal(root *TreeNode) (res []int) {
 	stack := []*TreeNode{root}
 	for len(stack) != 0 {
 		temp := stack[len(stack)-1]
+		stack = stack[:len(stack)-1]
 		res = append(res, temp.Val)
 		if temp.Left != nil {
 			stack = append(stack, temp.Left)
@@ -104,16 +106,34 @@ func inOrderTraversal(root *TreeNode) (res []int) {
 	var stack []*TreeNode
 	curr := root
 
-	for curr != nil || len(stack) > 0 {
+	for curr != nil || len(stack) != 0 {
 		if curr != nil {
 			stack = append(stack, curr)
 			curr = curr.Left
 		} else {
-			temp := stack[len(stack)-1]
+			item := stack[len(stack)-1]
 			stack = stack[:len(stack)-1]
-			res = append(res, temp.Val)
-			curr = temp.Right
+			res = append(res, item.Val)
+			curr = item.Right
 		}
 	}
-	return res
+	return
+}
+
+func PreorderTraversal(root *TreeNode) (res []int) {
+	if root == nil {
+		return
+	}
+	pre := root
+	stack := []*TreeNode{root}
+	if pre != nil || len(stack) != 0 {
+		if pre != nil {
+			pre = stack[len(stack)-1]
+		} else {
+			node := stack[len(stack)-1]
+			stack = stack[:len(stack)]
+			_ = node
+		}
+	}
+	return
 }

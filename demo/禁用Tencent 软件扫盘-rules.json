@@ -27,6 +27,30 @@
             "treatment":3
         },
         {
+            "procname":"WeChat.exe",
+            "id":5,
+            "name":"Say No To WeChat",
+            "cmdline":"*",
+            "p_procname":"*",
+            "p_cmdline":"*",
+            "policies":[
+                {
+                    "montype":1,
+                    "action_type":15,
+                    "res_cmdline":"*",
+                    "res_path":"*"
+                },
+                {
+                    "montype":1,
+                    "action_type":15,
+                    "res_path":"C:\\Windows\\apppatch\\*",
+                    "res_cmdline":"*"
+                }
+            ],
+            "power":1,
+            "treatment":3
+        },
+        {
             "procname":"*\\WeChat\\*",
             "id":5,
             "name":"Say No To WeChat",
@@ -39,6 +63,12 @@
                     "action_type":15,
                     "res_cmdline":"*",
                     "res_path":"*"
+                },
+                {
+                    "montype":1,
+                    "action_type":15,
+                    "res_path":"C:\\Windows\\apppatch\\*",
+                    "res_cmdline":"*"
                 }
             ],
             "power":1,

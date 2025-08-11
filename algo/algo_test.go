@@ -101,52 +101,34 @@ func Move(nums []int) []int {
 	return nums
 }
 
-func main() {
-	loop := 0
-	fmt.Scanln(&loop)
-	for ; loop > 0; loop-- {
-		flag := false
-		n, m, k := 0, 0, 0
-		fmt.Scan(&n, &m, &k)
-		min_step := max(n, m)
-		if k < min_step {
-			fmt.Println(-1)
-			continue
-		}
-		remain := k - min_step
-		// 我的思路是先到达目标点，然后如果是剩余奇数步，就走一个三角形，先有一个斜边再走两个直角边到达原点
-		if remain%2 == 1 {
-			flag = true
-			remain -= 3
-		}
-		maxDiagonal := min(n, m) + remain
-		if flag {
-			fmt.Println(maxDiagonal + 1)
-		} else {
-			fmt.Println(maxDiagonal)
-		}
-
-	}
-}
-
-func max(a, b int) int {
-	if a > b {
-		return a
-	} else {
-		return b
-	}
-}
-func min(a, b int) int {
-	if a < b {
-		return a
-	} else {
-		return b
-	}
-}
-
 func TestQ(t *testing.T) {
 	ch := make(chan int, 7)
 	for i := 0; i < 8; i++ {
 		ch <- i
+	}
+}
+
+func TestTrie(t *testing.T) {
+	patterns := map[string]interface{}{
+		"foo/bar":     "value1",
+		"foo/*/baz":   "value2",
+		"foo/**":      "value3",
+		"foo/**/DADA": "value4",
+		"foo/**DADA":  "value5",
+		"repo*/data":  "value6",
+		"\\*/escaped": "value7",
+	}
+
+	tests := []string{
+		"foo/bar", "foo/x/baz", "foo/bar/WD", "foo/x/y/z",
+		"foo/x/y/z/DADA", "foo/x/y/zDADA", "repository/data", "*/escaped",
+	}
+	m := NewMatcher(patterns)
+	for _, t := range tests {
+		if v, ok := m.Match(t); ok {
+			fmt.Printf("%-20q → %v\n", t, v)
+		} else {
+			fmt.Printf("%-20q → no match\n", t)
+		}
 	}
 }

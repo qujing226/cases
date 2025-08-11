@@ -59,10 +59,6 @@ func TestAsyncProducer(t *testing.T) {
 	}
 }
 
-type JSONEncoder struct {
-	Data any
-}
-
 func TestConsumer(t *testing.T) {
 	cfg := sarama.NewConfig()
 	consumer, err := sarama.NewConsumerGroup(addrs,
@@ -78,9 +74,12 @@ func TestConsumer(t *testing.T) {
 	t.Log(err)
 }
 
+// testConsumerGroupHandler 必须实现 sarama.ConsumerGroupHandler 接口
+// 重点是 ConsumeClaim 的实现
 type testConsumerGroupHandler struct {
 }
 
+// Setup 初始化
 func (t *testConsumerGroupHandler) Setup(session sarama.ConsumerGroupSession) error {
 	log.Println("Setup")
 	// 更改偏移量，建议走离线渠道
@@ -93,12 +92,14 @@ func (t *testConsumerGroupHandler) Setup(session sarama.ConsumerGroupSession) er
 	return nil
 }
 
+// Cleanup 释放资源
 func (t *testConsumerGroupHandler) Cleanup(session sarama.ConsumerGroupSession) error {
 	log.Println("Cleanup")
 	return nil
 }
 
-// 异步消费
+// ConsumeClaim 是一个具体的消费逻辑
+// 此处是异步消费
 func (t *testConsumerGroupHandler) ConsumeClaim(
 	// session 代表会话（建立链接-彻底断掉）
 	session sarama.ConsumerGroupSession,
